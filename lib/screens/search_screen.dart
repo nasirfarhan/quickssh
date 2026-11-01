@@ -66,37 +66,35 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Hero(
           tag: "search-bar",
-          child: TypeAheadField(
+          child: TypeAheadField<Command>(
               key: key,
-              getImmediateSuggestions: true,
-              keepSuggestionsOnSuggestionSelected: true,
-              hideSuggestionsOnKeyboardHide: false,
-              suggestionsBoxDecoration: SuggestionsBoxDecoration(
-                borderRadius: BorderRadius.zero,
-                elevation: 0,
-                offsetX: -55,
-                constraints: BoxConstraints(
-                  maxHeight: 1000,
-                  minWidth: MediaQuery.of(context).size.width,
-                ),
+              controller: _controller,
+              showOnFocus: true,
+              hideOnUnfocus: false,
+              hideOnSelect: false,
+              offset: Offset(-55, 0),
+              constraints: BoxConstraints(
+                maxHeight: 1000,
+                minWidth: MediaQuery.of(context).size.width,
               ),
-              textFieldConfiguration: TextFieldConfiguration(
-                onEditingComplete: () {
-                  // workaround for when user hide enters suggestions hidden
-                  SystemChannels.textInput.invokeMethod('TextInput.hide');
-                },
-                controller: _controller,
-                autofocus: true,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
-                    hintText: "Search tldr_ "),
-              ),
+              builder: (context, controller, focusNode) => TextField(
+                    onEditingComplete: () {
+                      // workaround for when user hide enters suggestions hidden
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
+                    },
+                    controller: controller,
+                    focusNode: focusNode,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        hintText: "Search tldr_ "),
+                  ),
               suggestionsCallback: (pattern) async {
                 if (pattern.length > 1) {
                   return await getSuggestions(pattern);
@@ -106,7 +104,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ]; // bad workaround for condition when user opens search screen for first time.
               },
               itemBuilder: (context, suggestion) {
-                return (suggestion as Command).name == "null"
+                return suggestion.name == "null"
                     ? Container()
                     : BlocBuilder<CommandBloc, CommandState>(
                         builder: (context, state) {
@@ -123,13 +121,13 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       );
               },
-              noItemsFoundBuilder: (_) => ListTile(
+              emptyBuilder: (_) => ListTile(
                     title: Text("No commands found"),
                     subtitle: Text(""),
                     tileColor: Color(0xff17181c),
                   ),
-              onSuggestionSelected: (suggestion) {
-                Command command = suggestion as Command;
+              onSelected: (suggestion) {
+                Command command = suggestion;
                 Command c = Command(
                   name: command.name,
                   platform: command.platform,

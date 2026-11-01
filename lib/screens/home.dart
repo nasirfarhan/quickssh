@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -204,11 +203,9 @@ class _TLDRState extends State<TLDR> {
                   Container(
                     height: 300,
                     width: 300,
-                    child: FlareActor(
-                      "assets/images/tldr.flr",
-                      alignment: Alignment.center,
+                    child: Image.asset(
+                      "assets/images/tldr.png",
                       fit: BoxFit.contain,
-                      animation: "startup",
                     ),
                   ),
                   Padding(
