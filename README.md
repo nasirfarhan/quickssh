@@ -1,6 +1,6 @@
 ## Screenshots
 
-|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/5_en-US.png)|
+|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.png)|![](android/fastlane/metadata/android/en-US/images/phoneScreenshots/5_en-US.png)|
 |---|---|---|---|---|
 
 You don't need to remember all the commands you will have quick or should I say quissh access to secure shell commands on your phone with description. 
